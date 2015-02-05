@@ -1,0 +1,9 @@
+name: SlapGames
+version: 0.0.1
+description: Slap-Gaming Mini-Games plugin
+author: Stoux
+website: http://www.stoux.nl/
+
+main: nl.stoux.SlapGames.SlapGames
+database: false
+depend: [WorldGuard, WorldEdit, SlapPlayers]
