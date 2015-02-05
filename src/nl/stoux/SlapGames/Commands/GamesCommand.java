@@ -12,7 +12,8 @@ import org.bukkit.command.CommandSender;
 @Cmd(
         command = "games",
         permission = "games",
-        description = "Shows a list of all the games and the players"
+        description = "Shows a list of all the games and the players",
+        aliases = {"slapgames", "stouxgames"}
 )
 public class GamesCommand extends BaseCommand {
 
@@ -22,7 +23,7 @@ public class GamesCommand extends BaseCommand {
 
     @Override
     public void handle() throws BaseException {
-        badMsg("Fgt");
+
     }
 
 }

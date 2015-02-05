@@ -3,7 +3,6 @@ package nl.stoux.SlapGames.Games.Parkour.Maps;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 import nl.stoux.SlapGames.Settings.BaseSettings;
 import nl.stoux.SlapGames.Settings.Errors.SettingError;
 import nl.stoux.SlapGames.Settings.Setting;
@@ -14,7 +13,9 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Stoux on 24/01/2015.

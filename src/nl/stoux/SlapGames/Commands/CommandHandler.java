@@ -33,7 +33,9 @@ import static nl.stoux.SlapGames.Util.PlayerUtil.*;
 public class CommandHandler {
 
     /**
-     * A HashMap containing a combination of a
+     * A HashMap containing a combination of a Command+Arguments -> Command
+     * K: List of command + arguments, ex: <games,settings> where Games is the command and Settings is a subcommand
+     * V: The CommandBox
      */
     private ConcurrentHashMap<List<String>, CommandBox> commands;
 

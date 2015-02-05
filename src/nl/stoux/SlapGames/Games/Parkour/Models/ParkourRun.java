@@ -1,6 +1,7 @@
 package nl.stoux.SlapGames.Games.Parkour.Models;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import nl.stoux.SlapPlayers.SQL.Annotations.Column;
 import nl.stoux.SlapPlayers.SQL.Annotations.Table;
 

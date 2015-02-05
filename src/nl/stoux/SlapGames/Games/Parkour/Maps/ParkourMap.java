@@ -6,7 +6,6 @@ import nl.stoux.SlapGames.Games.Parkour.Models.ParkourRun;
 import nl.stoux.SlapGames.Games.Parkour.Models.StoredParkourRun;
 import nl.stoux.SlapGames.Games.Parkour.Parkour;
 import nl.stoux.SlapGames.Games.Parkour.ParkourPlayer;
-import nl.stoux.SlapGames.Storage.YamlFile;
 import nl.stoux.SlapGames.Util.Schedule;
 import nl.stoux.SlapGames.Util.Util;
 import org.bukkit.Location;

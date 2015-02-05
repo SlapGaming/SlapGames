@@ -5,8 +5,6 @@ import lombok.Getter;
 import nl.stoux.SlapGames.Games.Base.BaseGame;
 import nl.stoux.SlapGames.Games.GameType;
 import nl.stoux.SlapGames.Games.Parkour.Maps.ParkourMap;
-import nl.stoux.SlapGames.Games.Parkour.Maps.ParkourMapSettings;
-import nl.stoux.SlapGames.Players.PlayerState;
 import nl.stoux.SlapGames.Util.Util;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

@@ -3,15 +3,10 @@ package nl.stoux.SlapGames.Games.Spleef;
 import nl.stoux.SlapGames.Games.Base.BaseEventHandler;
 import nl.stoux.SlapGames.Games.Base.GameState;
 import nl.stoux.SlapGames.Players.GamePlayer;
-import nl.stoux.SlapGames.Players.PlayerState;
-import nl.stoux.SlapGames.Util.Util;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 
 /**
  * Created by Stoux on 22/01/2015.

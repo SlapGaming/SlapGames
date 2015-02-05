@@ -1,15 +1,12 @@
 package nl.stoux.SlapGames.Games.Base;
 
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.AccessLevel;
 import lombok.Getter;
 import nl.stoux.SlapGames.Settings.BaseSettings;
 import nl.stoux.SlapGames.Settings.Setting;
 import nl.stoux.SlapGames.Settings.SettingGroup;
-import nl.stoux.SlapGames.Settings.SetupSettings;
 import nl.stoux.SlapGames.Storage.YamlFile;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 
 /**
  * Created by Stoux on 22/01/2015.

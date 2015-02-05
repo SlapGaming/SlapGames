@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import nl.stoux.SlapGames.Commands.Annotations.Cmd;
 import nl.stoux.SlapGames.Commands.Base.BaseCommand;
-import org.bukkit.GameMode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

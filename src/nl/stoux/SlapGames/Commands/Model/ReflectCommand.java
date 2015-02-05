@@ -1,6 +1,5 @@
 package nl.stoux.SlapGames.Commands.Model;
 
-import lombok.AllArgsConstructor;
 import nl.stoux.SlapGames.Commands.CommandHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -6,7 +6,6 @@ import nl.stoux.SlapPlayers.SQL.DaoControl;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.sql.SQLException;
-import java.util.function.Consumer;
 
 /**
  * Created by Stoux on 23/01/2015.

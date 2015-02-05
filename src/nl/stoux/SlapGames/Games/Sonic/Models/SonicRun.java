@@ -1,6 +1,8 @@
 package nl.stoux.SlapGames.Games.Sonic.Models;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import nl.stoux.SlapPlayers.SQL.Annotations.Column;
 import nl.stoux.SlapPlayers.SQL.Annotations.Table;
 

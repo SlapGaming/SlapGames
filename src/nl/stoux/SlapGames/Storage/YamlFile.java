@@ -1,13 +1,13 @@
 package nl.stoux.SlapGames.Storage;
 
-import java.io.File;
-import java.io.IOException;
-
 import lombok.Getter;
 import nl.stoux.SlapGames.SlapGames;
 import nl.stoux.SlapGames.Util.Log;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * YamlStorage class from SlapHomebrew. All credits to {@author naithantu}

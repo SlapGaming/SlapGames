@@ -1,6 +1,5 @@
 package nl.stoux.SlapGames.Util;
 
-import nl.stoux.SlapGames.Commands.Exceptions.CommonException;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

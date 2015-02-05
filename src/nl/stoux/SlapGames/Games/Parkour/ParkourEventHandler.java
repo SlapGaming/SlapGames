@@ -2,8 +2,8 @@ package nl.stoux.SlapGames.Games.Parkour;
 
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import nl.stoux.SlapGames.Games.Base.BaseEventHandler;
 import nl.stoux.SlapGames.Exceptions.BaseException;
+import nl.stoux.SlapGames.Games.Base.BaseEventHandler;
 import nl.stoux.SlapGames.Games.Parkour.Maps.ParkourMap;
 import nl.stoux.SlapGames.Games.Parkour.Maps.ParkourMapSettings;
 import nl.stoux.SlapGames.Games.Parkour.Models.ParkourMapAccess;

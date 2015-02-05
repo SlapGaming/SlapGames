@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import nl.stoux.SlapGames.Commands.Exceptions.UsageException;
 import nl.stoux.SlapGames.Exceptions.BaseException;
 import nl.stoux.SlapGames.Util.PlayerUtil;
-import nl.stoux.SlapGames.Util.PlayerUtil.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -34,14 +33,26 @@ public abstract class BaseCommand {
      * Functions for the subclasses
      */
 
+    /**
+     * Message the CommandSender
+     * @param message the message
+     */
     protected void msg(String message) {
-
+        sender.sendMessage(message);
     }
 
+    /**
+     * Message the CommandSender with a [Header] prepended before the message
+     * @param message The message
+     */
     protected void hMsg(String message) {
-
+        //TODO
     }
 
+    /**
+     * Send a 'Bad Message' in red to the CommandSender
+     * @param message The message
+     */
     protected void badMsg(String message) {
         PlayerUtil.badMsg(sender, message);
     }
