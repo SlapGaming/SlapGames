@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import nl.stoux.SlapGames.Games.Sonic.Models.SonicRun;
 import nl.stoux.SlapGames.Players.GamePlayer;
+import nl.stoux.SlapGames.Util.PlayerUtil;
 import nl.stoux.SlapGames.Util.Schedule;
 import nl.stoux.SlapGames.Util.Util;
 import org.bukkit.ChatColor;
@@ -62,7 +63,7 @@ public class SonicPlayer extends GamePlayer<Sonic> {
 
     /** The player has started a new run */
     public void startNewRun() {
-        run = new SonicRun(Util.getUserID(player));
+        run = new SonicRun(PlayerUtil.getUserID(player));
         running = true;
     }
 

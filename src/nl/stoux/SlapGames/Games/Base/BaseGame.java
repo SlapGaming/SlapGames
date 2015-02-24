@@ -6,6 +6,7 @@ import lombok.Getter;
 import nl.stoux.SlapGames.Games.Exceptions.GameStoppedException;
 import nl.stoux.SlapGames.Games.Exceptions.InvalidGameStateException;
 import nl.stoux.SlapGames.Games.Exceptions.NoSpectateException;
+import nl.stoux.SlapGames.Games.GameControl;
 import nl.stoux.SlapGames.Games.GameType;
 import nl.stoux.SlapGames.Players.GamePlayer;
 import nl.stoux.SlapGames.Players.PlayerState;
@@ -117,7 +118,7 @@ public abstract class BaseGame<Handler extends BaseEventHandler, GP extends Game
 
         //Add the player to the lists
         players.add(gamePlayer);
-        //TODO Add player to playerControl
+        GameControl.storeGamePlayer(gamePlayer);
 
 
         //Let the player join the game
@@ -135,6 +136,9 @@ public abstract class BaseGame<Handler extends BaseEventHandler, GP extends Game
      * @param gamePlayer The player
      */
     public void playerQuits(GP gamePlayer) {
+        //Broadcast the leave
+        hMessagePlayers(gamePlayer.getPlayername() + " has left the game!");
+
         //Leave the game
         switch (gamePlayer.getPlayerState()) {
             //The player is spectating
@@ -148,15 +152,12 @@ public abstract class BaseGame<Handler extends BaseEventHandler, GP extends Game
                 break;
         }
 
-        //Broadcast the leave
-        hMessagePlayers(gamePlayer.getPlayername() + " has left the game!");
-
         //Reset the player
         gamePlayer.resetPlayer();
 
         //Remove the player from the lists
         players.remove(gamePlayer);
-        //TODO Remove player from playerControl
+        GameControl.removeGamePlayer(gamePlayer);
 
         //Teleport the player back to the spawn of the world
         Util.toHub(gamePlayer);

@@ -18,25 +18,28 @@ public @interface Cmd {
     boolean playerOnly() default false;
 
     /** The command */
-    String command();
-
-    /** The command is a SubCommand. Will only be triggered with the following arguments */
-    String[] subCommand() default {};
+    CmdTrain command();
 
     /** Aliases for this command */
-    String[] aliases() default {};
+    //CmdTrain[] aliases() default {};
 
     /** The description of the command */
     String description() default "";
 
     /** The usage message given */
-    String usageMessage() default "";
+    Usage usage() default @Usage();
+
+    /** Build a usage message of all possible arguments */
+    boolean buildUsageMessage() default false;
 
     /** The permissions needed for this command */
     String[] permission() default {};
 
     /** Command is tied to a GameMode */
     GameType gameMode() default GameType.NO_GAME;
+
+    /** Command can only be used by players in that minigame */
+    boolean inGameOnly() default false;
 
     /** The command is enabled and should be registered */
     boolean enabled() default true;

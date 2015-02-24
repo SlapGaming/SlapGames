@@ -1,10 +1,11 @@
 package nl.stoux.SlapGames.Games.Spleef.Arenas;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import nl.stoux.SlapGames.Games.Spleef.Models.SpleefGame;
+import nl.stoux.SlapGames.Games.Base.Arena.BaseArenaState;
+import nl.stoux.SlapGames.Games.Spleef.Models.SpleefGameData;
+import nl.stoux.SlapGames.Games.Spleef.Models.SpleefGameDataPlayer;
 import nl.stoux.SlapGames.Games.Spleef.Spleef;
 import nl.stoux.SlapGames.Players.GamePlayer;
 import nl.stoux.SlapGames.Util.Util;
@@ -16,35 +17,46 @@ import java.util.*;
 /**
  * Created by Stoux on 23/01/2015.
  */
-public class SpleefArenaState {
+public class SpleefArenaState extends BaseArenaState<SpleefArena, SpleefGameData, SpleefGameDataPlayer> {
 
-    @Getter(AccessLevel.PUBLIC)
-    private SpleefArena arena;
-    @Getter(AccessLevel.PUBLIC)
-    private HashSet<Block> blocks;
-    @Getter(AccessLevel.PUBLIC)
-    private ProtectedRegion deathRegion;
-    @Getter(AccessLevel.PUBLIC)
-    private ProtectedRegion spectatorRegion;
-    @Getter(AccessLevel.PUBLIC)
-    private Location spectatorLocation;
-
-    @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PUBLIC)
-    private SpleefGame spleefGame;
+    /** The Set with blocks that can be destroyed */
+    @Getter private HashSet<Block> blocks;
+    /** The death region */
+    @Getter private ProtectedRegion deathRegion;
 
     public SpleefArenaState(SpleefArena arena) {
-        this.arena = arena;
+        super(arena);
         this.blocks = new HashSet<>(Util.getBlocksInRegion(arena.getRegion()));
         SpleefArenaSettings settings = arena.getSettings();
         this.deathRegion = settings.getDeathRegion().getValue();
-        if (settings.getSpectators().getValue()) {
-            this.spectatorLocation = settings.getSpectatorLocation().getValue();
-            this.spectatorRegion = settings.getSpectatorRegion().getValue();
-        }
     }
 
+    @Override
+    protected SpleefGameData createGameData() {
+        return new SpleefGameData();
+    }
 
+    @Override
+    protected SpleefGameDataPlayer createGameDataPlayer(SpleefGameData spleefGameData, int playerID) {
+        return new SpleefGameDataPlayer(spleefGameData.getGameID(), playerID);
+    }
+
+    @Override
+    public void setupArena(int forPlayers) {
+        arena.setRandomFloor();
+    }
+
+    @Override
+    public void gameStarts(int nrOfPlayers) {
+        gameData.setStartTime(System.currentTimeMillis());
+        gameData.setNrOfPlayers(nrOfPlayers);
+    }
+
+    @Override
+    public void playerWon(int playerID) {
+        gameData.setWinningUserID(playerID);
+        gameData.setFinishTime(System.currentTimeMillis());
+    }
 
     /**
      * Check if this arena's floor contains a block

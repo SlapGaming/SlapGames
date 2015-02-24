@@ -152,39 +152,23 @@ public class ParkourEventHandler extends BaseEventHandler<Parkour, ParkourPlayer
                     try {
                         switch (pt) {
                             case RESTART_CHECKPOINT:
-                                //Check if there's a checkpoint to go back to | Otherwise full restart
-                                if (gp.getRun() != null) {
-                                    int lastCheckpoint = gp.getRun().getLastCheckpoint();
-                                    if (lastCheckpoint > 0) {
-                                        gp.teleport(gp.getMap().getRespawnLocation(gp));
-                                        game.hMessagePlayer(gp, "You have been warped back to checkpoint #" + lastCheckpoint + "!");
-                                        break;
-                                    }
-                                }
+                                gp.restartRunAtLastCheckpoint();
+                                break;
+
                             case RESTART:
-                                //Restart the run
-                                gp.setRun(null);
-                                gp.teleport(gp.getMap().getSettings().getLobby().getValue());
-                                game.hMessagePlayer(gp, "You've been warped back to the start!");
+                                gp.restartRun();
                                 break;
 
                             case CONTINUE:
-                                //Continue from a stored run
-                                checkStoredRun(gp);
-                                gp.setRun(ParkourRun.continueStoredParkourRun(gp.getStoredRun()));
-                                gp.setStoredRun(null);
-                                gp.teleport(gp.getMap().getRespawnLocation(gp));
-                                game.hMessagePlayer(gp, "You are continueing your run at checkpoint #" + gp.getRun().getLastCheckpoint() + "!");
+                                gp.continueStoredRun();
+                                break;
 
                             case TIME:
-                                //Get the current time
-                                game.hMessagePlayer(gp, "Current time: " + gp.getRun().getCurrentTookTime());
+                                gp.sendCurrentTime();
                                 break;
 
                             case RESET:
-                                checkStoredRun(gp);
-                                gp.setStoredRun(null);
-                                game.hMessagePlayer(gp, "Your saved run has been reset!");
+                                gp.removeSavedRun();
                                 break;
                         }
                     } catch (BaseException e) {

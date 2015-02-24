@@ -3,7 +3,7 @@ package nl.stoux.SlapGames;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import lombok.AccessLevel;
 import lombok.Getter;
-import nl.stoux.SlapGames.Commands.CommandHandler;
+import nl.stoux.SlapGames.Commands.Handler.CommandHandler;
 import nl.stoux.SlapGames.Games.GameType;
 import nl.stoux.SlapGames.Util.Log;
 import nl.stoux.SlapGames.Util.Util;

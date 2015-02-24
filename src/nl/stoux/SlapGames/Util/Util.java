@@ -270,42 +270,6 @@ public class Util {
     public static void returnSQLConnection(Connection connection) {
         getSQLPool().returnConnection(connection);
     }
-
-    /**
-     * Get the UUIDController
-     * @return the controller
-     */
-    public static UUIDControl getUUIDController() {
-        return SlapPlayers.getUUIDController();
-    }
-
-    /**
-     * Get a player's UUID profile
-     * @param p The player
-     * @return The profile
-     */
-    public static Profile getProfile(Player p) {
-        return getUUIDController().getProfile(p);
-    }
-
-    /**
-     * Get a player's User ID as specified in the database
-     * @param p The player
-     * @return The ID
-     */
-    public static int getUserID(Player p) {
-        return getProfile(p).getID();
-    }
-
-    /**
-     * Get a player's User ID as specified in the database
-     * @param gp The player
-     * @return The ID
-     */
-    public static int getUserID(GamePlayer gp) {
-        return getUserID(gp.getPlayer());
-    }
-
     //</editor-fold>
 
     //<editor-fold desc="Location/Block Functions">

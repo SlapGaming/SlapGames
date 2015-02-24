@@ -8,7 +8,7 @@ import nl.stoux.SlapPlayers.SQL.Annotations.Table;
 /**
  * Created by Stoux on 25/01/2015.
  */
-@Table(name = "sg_parkour_runs")
+@Table("sg_parkour_runs")
 @NoArgsConstructor
 public class ParkourRun extends StoredParkourRun {
 
@@ -16,7 +16,7 @@ public class ParkourRun extends StoredParkourRun {
     private long relativeStartTime;
 
     /** The timestamp that they finished this run */
-    @Column(name = "finish_timestamp")
+    @Column("finish_timestamp")
     @Getter private Long finishTimestamp = null;
 
     public ParkourRun(int userID, int mapID) {

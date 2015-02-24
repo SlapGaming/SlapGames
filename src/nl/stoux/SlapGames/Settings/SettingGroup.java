@@ -9,6 +9,7 @@ import lombok.Getter;
 public enum SettingGroup {
 
     BASE("General"),
+    BASE_ARENA("Arena"),
 
     SPLEEF("Spleef"),
     SPLEEF_ARENA("Arena"),

@@ -7,6 +7,7 @@ import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.AccessLevel;
 import lombok.Getter;
+import nl.stoux.SlapGames.Games.Base.Arena.BaseArena;
 import nl.stoux.SlapGames.Storage.YamlFile;
 import nl.stoux.SlapGames.Util.Util;
 import org.bukkit.Material;
@@ -14,7 +15,7 @@ import org.bukkit.Material;
 /**
  * Created by Stoux on 22/01/2015.
  */
-public class SpleefArena {
+public class SpleefArena extends BaseArena<SpleefArenaSettings> {
 
     /** Available floor types */
     @Getter
@@ -29,27 +30,22 @@ public class SpleefArena {
             Material.SOUL_SAND
     };
 
-    /** The filename without .yml */
-    private String filename;
-
-    @Getter(AccessLevel.PUBLIC)
-    private SpleefArenaSettings settings;
-
     public SpleefArena(YamlFile file) {
-        this.settings = new SpleefArenaSettings(file);
-        this.filename = file.getFilename();
+        super(file);
     }
 
-    /**
-     * Save the floor
-     * @return saved
-     */
-    public boolean saveFloor() {
+    @Override
+    protected SpleefArenaSettings createSettings(YamlFile file) {
+        return new SpleefArenaSettings(file);
+    }
+
+    @Override
+    public boolean saveArena() {
         return Util.saveSchematic(getRegion(), "Spleef", filename);
     }
 
-    /** Restore the floor */
-    public boolean restoreFloor() {
+    @Override
+    public boolean restoreArena() {
         return Util.pasteClipboard(Util.loadSchematic("Spleef", filename));
     }
 

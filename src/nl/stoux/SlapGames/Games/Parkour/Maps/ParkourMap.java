@@ -6,6 +6,7 @@ import nl.stoux.SlapGames.Games.Parkour.Models.ParkourRun;
 import nl.stoux.SlapGames.Games.Parkour.Models.StoredParkourRun;
 import nl.stoux.SlapGames.Games.Parkour.Parkour;
 import nl.stoux.SlapGames.Games.Parkour.ParkourPlayer;
+import nl.stoux.SlapGames.Util.PlayerUtil;
 import nl.stoux.SlapGames.Util.Schedule;
 import nl.stoux.SlapGames.Util.Util;
 import org.bukkit.Location;
@@ -101,7 +102,7 @@ public class ParkourMap {
         }
 
         //Start a new run
-        ParkourRun run = new ParkourRun(Util.getUserID(gp), settings.getId().getValue());
+        ParkourRun run = new ParkourRun(PlayerUtil.getUserID(gp), settings.getId().getValue());
         gp.setRun(run);
         gp.setStoredRun(null);
         game.hMessagePlayer(gp, "You started a new run!");

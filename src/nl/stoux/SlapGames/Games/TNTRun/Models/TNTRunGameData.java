@@ -1,4 +1,4 @@
-package nl.stoux.SlapGames.Games.Spleef.Models;
+package nl.stoux.SlapGames.Games.TNTRun.Models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,21 +12,25 @@ import nl.stoux.SlapPlayers.SQL.Annotations.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "sg_spleef_games")
-public class SpleefGame {
+@Table(value = "sg_tntrun_games")
+public class TNTRunGameData {
 
-    @Column(name = "winner_id")
+    @Column(value = "id", autoIncrementID = true)
+    private int gameID;
+
+    @Column(value = "winner_id")
     private int winningUserID;
-    @Column(name = "nr_of_players")
+
+    @Column(value = "nr_of_players")
     private int nrOfPlayers;
 
-    @Column(name = "start_time")
+    @Column(value = "start_time")
     private long startTime;
 
-    @Column(name = "finish_time")
+    @Column(value = "finish_time")
     private long finishTime;
 
-    public SpleefGame(int nrOfPlayers) {
+    public TNTRunGameData(int nrOfPlayers) {
         this.nrOfPlayers = nrOfPlayers;
         this.startTime = System.currentTimeMillis();
     }

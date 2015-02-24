@@ -1,16 +1,18 @@
 package nl.stoux.SlapGames.Commands.Base;
 
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 import nl.stoux.SlapGames.Commands.Exceptions.UsageException;
 import nl.stoux.SlapGames.Exceptions.BaseException;
+import nl.stoux.SlapGames.Games.GameControl;
+import nl.stoux.SlapGames.Players.GamePlayer;
 import nl.stoux.SlapGames.Util.PlayerUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * Created by Stoux on 05/02/2015.
  */
-@AllArgsConstructor
 public abstract class BaseCommand {
 
     /** The sender who executed this command */
@@ -23,15 +25,38 @@ public abstract class BaseCommand {
     protected String usedAlias;
 
     /** The used arguments */
-    protected String args[];
+    protected String[] args;
+
+    /** The arguments cast to a certain type */
+    @Setter private Object[] castArguments;
+
+    public BaseCommand(CommandSender sender, Command command, String usedAlias, String[] args) {
+        this.sender = sender;
+        this.command = command;
+        this.usedAlias = usedAlias;
+        this.args = args;
+    }
 
     /** Handle the command */
     public abstract void handle() throws BaseException;
 
 
-    /*
-     * Functions for the subclasses
+    /**
+     * Cast the CommandSender to player
+     * @return The player
      */
+    public Player getPlayer() {
+        return (Player) sender;
+    }
+
+    /**
+     * Get the GamePlayer
+     * Warning: Casts the CommandSender to a player
+     * @return The GamePlayer or null
+     */
+    public GamePlayer getGamePlayer() {
+        return GameControl.getGamePlayer(getPlayer());
+    }
 
     /**
      * Message the CommandSender
@@ -75,6 +100,21 @@ public abstract class BaseCommand {
         if (args.length < minNeededArgs) throw new UsageException();
     }
 
+    /**
+     * Get an argument cast to a certain type
+     * WARNING: This is only avaialable
+     * @param index The index of the argument
+     * @param typeOfArgument
+     * @param <Arg> The class of the argument
+     * @return The argument or null
+     */
+    public <Arg extends Object> Arg getArgument(int index, Class<Arg> typeOfArgument) {
+        try {
+            return (Arg) castArguments[index];
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 
 }

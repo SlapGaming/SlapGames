@@ -3,6 +3,7 @@ package nl.stoux.SlapGames.Games.Spleef;
 import nl.stoux.SlapGames.Games.Base.BaseEventHandler;
 import nl.stoux.SlapGames.Games.Base.GameState;
 import nl.stoux.SlapGames.Players.GamePlayer;
+import nl.stoux.SlapGames.Players.PlayerState;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -30,6 +31,7 @@ public class SpleefEventHandler extends BaseEventHandler<Spleef, GamePlayer<Sple
 
     @Override
     public void onPlayerMove(GamePlayer<Spleef> gp, PlayerMoveEvent event) {
+        super.onPlayerMove(gp, event);
         if (game.getGameState() == GameState.PLAYING && !event.isCancelled()) {
             game.onPlayerMove(gp, event.getTo());
         }
@@ -37,7 +39,9 @@ public class SpleefEventHandler extends BaseEventHandler<Spleef, GamePlayer<Sple
 
     @Override
     public void onPlayerDied(GamePlayer<Spleef> gp, PlayerDeathEvent event) {
-        //todo
+        if (isPlaying(gp)) {
+            game.playerLost(gp);
+        }
     }
 
 }

@@ -2,11 +2,14 @@ package nl.stoux.SlapGames.Commands.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import nl.stoux.SlapGames.Commands.Annotations.Cmd;
+import nl.stoux.SlapGames.Commands.Annotations.Redirect;
 import nl.stoux.SlapGames.Commands.Base.BaseCommand;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 /**
  * Created by Stoux on 05/02/2015.
@@ -23,5 +26,6 @@ public class CommandBox {
 
     /** Method for completing tabs, can be null */
     private Method tabMethod;
+
 
 }

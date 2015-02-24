@@ -10,12 +10,12 @@ import nl.stoux.SlapPlayers.SQL.Annotations.Table;
  * Created by Stoux on 23/01/2015.
  */
 @NoArgsConstructor
-@Table(name = "sg_sonic_leaderboard")
+@Table("sg_sonic_leaderboard")
 public class SonicRun {
 
     /** The user ID in the DB */
     @Getter(AccessLevel.PUBLIC)
-    @Column(name = "user_id")
+    @Column("user_id")
     private int userID;
 
     /** The timestamp of starting */
@@ -24,12 +24,12 @@ public class SonicRun {
 
     /** The timestamp of finishing */
     @Getter(AccessLevel.PUBLIC)
-    @Column(name = "finish_timestamp")
+    @Column("finish_timestamp")
     private long finishTimestamp;
 
     /** The total time it took to finish the run */
     @Getter(AccessLevel.PUBLIC)
-    @Column(name = "finish")
+    @Column("finish")
     private int totalTime;
 
     @Getter(AccessLevel.PUBLIC)

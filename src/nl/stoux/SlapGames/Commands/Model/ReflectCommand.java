@@ -1,9 +1,10 @@
 package nl.stoux.SlapGames.Commands.Model;
 
-import nl.stoux.SlapGames.Commands.CommandHandler;
+import nl.stoux.SlapGames.Commands.Handler.CommandHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ public class ReflectCommand extends Command {
 
     private CommandHandler handler;
 
-    public ReflectCommand(String name, String description, String usageMessage, List<String> aliases, CommandHandler handler) {
-        super(name, description, usageMessage, aliases);
+    public ReflectCommand(String name, CommandHandler handler) {
+        super(name, "", "", new ArrayList<>());
         this.handler = handler;
     }
 

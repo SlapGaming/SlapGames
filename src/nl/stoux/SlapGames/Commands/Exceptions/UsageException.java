@@ -1,5 +1,6 @@
 package nl.stoux.SlapGames.Commands.Exceptions;
 
+import lombok.Getter;
 import nl.stoux.SlapGames.Exceptions.BaseException;
 
 /**
@@ -10,4 +11,12 @@ public class UsageException extends BaseException {
     public UsageException() {
         super("Incorrect usage!");
     }
+
+    @Getter
+    private BaseException wrappedException;
+
+    public UsageException(BaseException wrappedException) {
+        this.wrappedException = wrappedException;
+    }
+
 }
