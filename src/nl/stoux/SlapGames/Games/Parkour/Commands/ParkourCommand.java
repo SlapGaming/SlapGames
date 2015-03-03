@@ -19,7 +19,7 @@ import org.bukkit.command.CommandSender;
         description = "The Parkour mini-game command",
         permission = "parkour",
         gameMode = GameType.PARKOUR,
-        buildUsageMessage = true
+        buildTabUsageMessage = true
 )
 @Redirect(commands = @CmdTrain(value = "parkour", arguments = "help"))
 public class ParkourCommand extends BaseGameCommand<Parkour, ParkourPlayer> {

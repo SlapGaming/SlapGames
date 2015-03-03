@@ -4,6 +4,7 @@ import nl.stoux.SlapGames.Commands.Annotations.CmdTrain;
 import nl.stoux.SlapGames.Commands.Annotations.Usage;
 import nl.stoux.SlapGames.Commands.Model.ArgumentType;
 import nl.stoux.SlapGames.Exceptions.BaseException;
+import nl.stoux.SlapGames.Games.GameType;
 import nl.stoux.SlapPlayers.Util.SUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -39,6 +40,20 @@ public class CommandUtil {
             throw new BaseException("'" + arg + "' needs to be atleast 1!");
         }
         return i;
+    }
+
+    /**
+     * Parse a String into a GameType
+     * @param arg The argument
+     * @return The GameType
+     * @throws BaseException if not a GameType
+     */
+    public static GameType parseGameType(String arg) throws BaseException {
+        GameType gt = GameType.parseGameType(arg);
+        if (gt == null) {
+            throw new BaseException("'" + arg + "' is not a GameType!");
+        }
+        return gt;
     }
 
 

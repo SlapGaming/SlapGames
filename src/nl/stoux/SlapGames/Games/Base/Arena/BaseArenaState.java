@@ -3,8 +3,8 @@ package nl.stoux.SlapGames.Games.Base.Arena;
 import lombok.Getter;
 import nl.stoux.SlapGames.Util.Log;
 import nl.stoux.SlapGames.Util.Schedule;
-import nl.stoux.SlapPlayers.SQL.Dao;
-import nl.stoux.SlapPlayers.SQL.DaoControl;
+import nl.stoux.SlapPlayers.SQL.DAO.Dao;
+import nl.stoux.SlapPlayers.SQL.DAO.DaoControl;
 import org.bukkit.Location;
 
 import java.sql.SQLException;

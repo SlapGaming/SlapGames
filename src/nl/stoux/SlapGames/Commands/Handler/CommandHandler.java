@@ -16,7 +16,7 @@ import nl.stoux.SlapGames.Util.CommandUtil;
 import nl.stoux.SlapGames.Util.Log;
 import nl.stoux.SlapGames.Util.PlayerUtil;
 import nl.stoux.SlapGames.Util.Util;
-import nl.stoux.SlapPlayers.Model.Profile;
+import nl.stoux.SlapPlayers.Util.SUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
@@ -64,18 +64,16 @@ public class CommandHandler {
     public void onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         try {
             //Find the box
+            RedirectBox redirectBox = null;
             AnnotationBox box = commands.getAnnotationBox(cmd.getName(), args);
             if (box == null || !box.isFilled()) {
                 //No box found at all
                 throw new BaseException("Eh... This command was somehow not found."); //TODO: Make this better?
             }
 
-            CmdTrain originalCommand;
-
             //Check if redirect box
             if (box.isRedirect()) {
-                RedirectBox redirectBox = box.getRedirect();
-                originalCommand = redirectBox.getFromCommand();
+                redirectBox = box.getRedirect();
                 CmdTrain toCmd = redirectBox.getToCommand();
                 CmdTrain fromCmd = redirectBox.getFromCommand();
 
@@ -92,7 +90,7 @@ public class CommandHandler {
 
                     //Add leftovers
                     for (int i = 0; i < args.length && i < leftOverArgs; i++) {
-                        newArgs[newArgs.length - i] = args[args.length - i];
+                        newArgs[newArgs.length - 1 - i] = args[args.length - 1 - i];
                     }
 
                     //Set the args
@@ -110,8 +108,6 @@ public class CommandHandler {
                     //Box is another redirect. Not going to allow double redirects.
                     throw new BaseException("Redirect loop. Warn Stoux!");
                 }
-            } else {
-                originalCommand = box.getCommand().getCmd().command();
             }
 
 
@@ -152,8 +148,10 @@ public class CommandHandler {
             String[] newArgs = new String[leftOverArgs];
             //=> Copy the last arguments
             for (int i = 0; i < args.length && i < leftOverArgs; i++) {
-                newArgs[newArgs.length - i] = args[args.length - i];
+                newArgs[newArgs.length - i - 1] = args[args.length - i - 1];
             }
+
+            Log.info(SUtil.combineToString(newArgs, " ", s -> s));
 
             //Check usage
             Usage usage = ann.usage();
@@ -163,22 +161,22 @@ public class CommandHandler {
 
             //=> Not enough arguments
             if (givenArgs < requiredArgs) {
-                throw new UsageException(); //TODO
+                throw buildUsageException(ann, redirectBox);
             }
 
             //=> To many arguments
             if (givenArgs > requiredArgs && !usage.allowOtherArguments() && !usage.repeatLastArguments()) {
-                throw new UsageException();
+                throw buildUsageException(ann, redirectBox);
             }
 
             //=> Check if any Usage types are given
             if (usage.value().length > 0) {
-                castObjects = new Object[args.length];
+                castObjects = new Object[newArgs.length];
 
                 try {
                     //Loop through given arguments
-                    for (int i = 0; i < args.length; i++) {
-                        String arg = args[i];
+                    for (int i = 0; i < newArgs.length; i++) {
+                        String arg = newArgs[i];
                         ArgumentType type;
                         Object object;
 
@@ -222,10 +220,7 @@ public class CommandHandler {
 
                             //Parse to GameType
                             case GAME_TYPE:
-                                object = GameType.parseGameType(arg);
-                                if (object == null) {
-                                    //TODO Throw usage
-                                }
+                                object = CommandUtil.parseGameType(arg);
                                 break;
 
                             //Default is fine with everything
@@ -239,10 +234,8 @@ public class CommandHandler {
                         castObjects[i] = object;
                     }
                 } catch (BaseException e) {
-                    //Throw error & usage
-                    badMsg(sender, e.getMessage());
-                    badMsg(sender, CommandUtil.createUsageString(originalCommand, usage));
-                    return;
+                    //Rethrow as UsageException
+                    throw buildUsageException(ann, redirectBox, e.getMessage());
                 }
             }
 
@@ -263,8 +256,6 @@ public class CommandHandler {
                 BaseCommand foundCommand = commandBox.getConstructor().newInstance(constructorArgs);
                 foundCommand.setCastArguments(castObjects);
                 foundCommand.handle();
-            } catch(UsageException e) {
-                //TODO
             } catch (Exception e) {
                 //A severe error occurred (most likely @ creating a new instance)
                 Log.severe("Failed to create Command | " + e.getClass().getName() + ": " + e.getMessage());
@@ -314,5 +305,89 @@ public class CommandHandler {
             throw new RuntimeException("Failed to load CommandMap");
         }
     }
+
+    /**
+     * Build a Usage Exception
+     * @param ann The command annotation
+     * @param redirectBox A possible redirect box
+     * @param topMessage lines appended before the the rest of the exception
+     * @return the exception
+     */
+    private static UsageException buildUsageException(Cmd ann, RedirectBox redirectBox, String... topMessage) {
+        String usageMsg = "Usage: /";
+        int usageIndex = 0;
+
+        //Create the usage message
+        if (redirectBox != null) {
+            //Old redirect command
+            usageMsg += toString(redirectBox.getFromCommand());
+
+            //Check howmany usage arguments were already given in the redirect
+            usageIndex  = redirectBox.getToCommand().arguments().length - ann.command().arguments().length;
+        } else {
+            usageMsg += toString(ann.command());
+        }
+
+        Usage usage = ann.usage();
+        ArgumentType[] usageArgs = usage.value();
+        String[] typeNames = usage.typeNames();
+        int givenNames = typeNames.length;
+        int requiredArgs = usageArgs.length;
+
+        //Add arguments
+        for (int i = usageIndex; i < requiredArgs; i++) {
+            //Get the presentable name
+            String pr = null;
+            if (givenNames > i) {
+                pr = typeNames[i];
+                if (pr == null || pr.isEmpty()) {
+                    pr = null;
+                }
+            }
+
+            //Get the default name if no name given
+            if (pr == null) {
+                pr = usageArgs[i].getPresentableName();
+            }
+
+            if (i == requiredArgs - 1 && usage.repeatLastArguments()) {
+                usageMsg += " <" + pr + " 1> [" + pr + " 2...]";
+            } else {
+                usageMsg += " <" + pr + ">";
+            }
+        }
+
+        //TODO Maybe add ... for optional other arguments
+
+        //Create String array
+        String[] msg;
+        if (topMessage.length == 0) {
+            msg = new String[]{ann.description(), usageMsg};
+        } else {
+            msg = new String[topMessage.length + 1];
+            for (int i = 0; i < topMessage.length; i++) {
+                msg[i] = topMessage[i];
+            }
+            msg[msg.length - 1] = usageMsg;
+        }
+
+        //Throw exception
+        return new UsageException(msg);
+    }
+
+
+    /**
+     * To string a CmdTrain
+     * @param cmdTrain
+     * @return
+     */
+    private static String toString(CmdTrain cmdTrain) {
+        String c = cmdTrain.value();
+        for (String s : cmdTrain.arguments()) {
+            c += " " + s;
+        }
+        return c;
+    }
+
 
 }

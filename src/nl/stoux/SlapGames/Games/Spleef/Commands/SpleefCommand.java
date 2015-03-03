@@ -18,7 +18,7 @@ import org.bukkit.command.CommandSender;
         description = "The Spleef mini-game command",
         permission = "spleef",
         gameMode = GameType.SPLEEF,
-        buildUsageMessage = true
+        buildTabUsageMessage = true
 )
 public class SpleefCommand extends BaseGameCommand<Spleef, GamePlayer<Spleef>> {
 

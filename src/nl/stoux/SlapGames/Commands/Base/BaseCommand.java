@@ -28,7 +28,7 @@ public abstract class BaseCommand {
     protected String[] args;
 
     /** The arguments cast to a certain type */
-    @Setter private Object[] castArguments;
+    @Setter protected Object[] castArguments;
 
     public BaseCommand(CommandSender sender, Command command, String usedAlias, String[] args) {
         this.sender = sender;

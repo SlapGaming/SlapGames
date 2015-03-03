@@ -117,7 +117,7 @@ public class StoredCommands {
         String arg = arguments[depth].toLowerCase();
         AnnotationBox foundBox = currentBox.getAnnotationBox(arg);
 
-        if (arguments.length == depth - 1) {
+        if (arguments.length - 1 == depth) {
             //Last argument. Must store now.
             if (foundBox == null) {
                 currentBox.storeAnnotationBox(arg, newBox);

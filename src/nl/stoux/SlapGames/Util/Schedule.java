@@ -1,8 +1,8 @@
 package nl.stoux.SlapGames.Util;
 
 import nl.stoux.SlapGames.SlapGames;
-import nl.stoux.SlapPlayers.SQL.Dao;
-import nl.stoux.SlapPlayers.SQL.DaoControl;
+import nl.stoux.SlapPlayers.SQL.DAO.Dao;
+import nl.stoux.SlapPlayers.SQL.DAO.DaoControl;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.sql.SQLException;

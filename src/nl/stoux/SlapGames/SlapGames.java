@@ -7,7 +7,7 @@ import nl.stoux.SlapGames.Commands.Handler.CommandHandler;
 import nl.stoux.SlapGames.Games.GameType;
 import nl.stoux.SlapGames.Util.Log;
 import nl.stoux.SlapGames.Util.Util;
-import nl.stoux.SlapPlayers.SQL.DaoControl;
+import nl.stoux.SlapPlayers.SQL.DAO.DaoControl;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

@@ -29,8 +29,8 @@ public @interface Cmd {
     /** The usage message given */
     Usage usage() default @Usage();
 
-    /** Build a usage message of all possible arguments */
-    boolean buildUsageMessage() default false;
+    /** Build a usage message of all possible arguments when used in TAB */
+    boolean buildTabUsageMessage() default false;
 
     /** The permissions needed for this command */
     String[] permission() default {};
