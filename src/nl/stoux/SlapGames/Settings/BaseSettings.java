@@ -40,15 +40,17 @@ public abstract class BaseSettings extends SetupSettings {
 
     @Override
     public void initializeSettings() {
-        SettingGroup g = SettingGroup.BASE;
+        SettingGroup g = SettingGroup.GENERAL;
         setup = load("setup", false, "Setup", "The game has been setup", g, true);
         enabled = load("enabled", false, "Enabled", "The game should be enabled", g, true);
 
         //Get the Lobby location
+        g = SettingGroup.LOCATIONS;
         lobby = load("lobby", Location.class, "Lobby", "The location of the lobby", g);
         outOfBoundsRegion = loadRegion("outofboundsregion", "Out of bounds region", "The name of the region for the out of bounds area", g);
 
         //Check if spectators are enabled
+        g = SettingGroup.SPECTATORS;
         spectators = load("spectators", false, "Allow Spectators", "This game supports spectators", g, true);
         specOutOfBoundsRegion = loadRegion("spectatorsoutofboundsregion", "Spectator out of bounds region", "The name of the region for the spectators out of bounds area", g);
         spectatorLocation = load("spectatorlocation", Location.class, "Spectator Spawn", "The spectator spawn location", g);

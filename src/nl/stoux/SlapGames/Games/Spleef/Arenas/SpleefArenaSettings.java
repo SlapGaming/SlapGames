@@ -29,7 +29,7 @@ public class SpleefArenaSettings extends BaseArenaSettings {
     @Override
     public void initializeSettings() {
         super.initializeSettings();
-        SettingGroup g = SettingGroup.SPLEEF_ARENA;
+        SettingGroup g = SettingGroup.ARENA;
         //Get the regions
         region = loadRegion("region", "Blocks Region", "The region that contains all the blocks the players will walk on", g);
         deathRegion = loadRegion("deathregion", "Death Region", "If a player enters this region they will be gameover", g);

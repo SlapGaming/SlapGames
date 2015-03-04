@@ -27,7 +27,7 @@ public class BaseVersusGameSettings extends BaseGameSettings {
     @Override
     public void initializeSettings() {
         super.initializeSettings();
-        SettingGroup g = SettingGroup.BASE;
+        SettingGroup g = SettingGroup.VERSUS;
         minimumPlayers = load("minimumplayers", 2, "Minimum Players", "The mimimum amount of players to start a game", g, true);
         startDelay = load("startdelay", 30, "Start Delay", "The number of seconds before the first game starts", g, true);
         secondsBetweenGames = load("secondsbetweengames", 20, "Seconds between games", "The number of seconds before another game starts", g, true);

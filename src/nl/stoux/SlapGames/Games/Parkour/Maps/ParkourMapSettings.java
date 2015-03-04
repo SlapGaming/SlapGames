@@ -76,19 +76,19 @@ public class ParkourMapSettings extends BaseSettings {
     public void initializeSettings() {
         super.initializeSettings();
 
-        SettingGroup g = SettingGroup.PARKOUR_MAPS_INFO;
+        SettingGroup g = SettingGroup.PARKOUR_MAP_INFO;
         id = load("id", Integer.class, "Map ID", "The ID of the map. Don't change after being set!", g);
         name = load("name", String.class, "Name", "The map name", g);
         author = load("author", String.class, "Author", "The author(s) of this map", g);
 
-        g = SettingGroup.PARKOUR_MAPS_CONTINUE;
+        g = SettingGroup.PARKOUR_MAP_CONTINUE;
         allowRestartOnCheckpoint = load("allowrestartoncheckpoint", false, "Allow restart on CP", "Allow the player to continue the map on their previous checkpoint after dying", g, true);
         storeCheckpointProgress = load("storecheckpointprogress", false, "Store CP progress", "The player can continue the map at their last checkpoint after leaving the map", g, true);
         Material[] buttons = new Material[]{Material.STONE_BUTTON, Material.WOOD_BUTTON};
         continueButton = loadBlock("continuebutton", "Continue Button", "The button that allows the player to continue the run after leaving", g, buttons);
         resetButton = loadBlock("resetbutton", "Reset Button", "The button that resets the player's progress", g, buttons);
 
-        g = SettingGroup.PARKOUR_MAPS_CHECKPOINTS;
+        g = SettingGroup.PARKOUR_MAP_CHECKPOINTS;
         startRegion = loadRegion("startregion", "Start Region", "The starting line", g);
         endRegion = loadRegion("endregion", "End Region", "The finish line", g);
 
@@ -100,7 +100,7 @@ public class ParkourMapSettings extends BaseSettings {
             section.getKeys(false).forEach(key -> checkpoints.add(initializeCheckpoint("checkpoints", key)));
         }
 
-        g = SettingGroup.PARKOUR_MAPS_DEATH;
+        g = SettingGroup.PARKOUR_MAP_DEATH;
         deathHeight = load("deathheight", 0, "Death Height", "The player dies if they go under this Y-Height", g, true);
 
         //Find death regions
@@ -108,7 +108,7 @@ public class ParkourMapSettings extends BaseSettings {
         deathRegions = new ArrayList<>();
         if (config.contains(dRegions)) {
             ConfigurationSection section = config.getConfigurationSection(dRegions);
-            section.getKeys(false).forEach(key -> loadRegion(dRegions + "." + key, "Death Region", "The player will die if they hit this region", SettingGroup.PARKOUR_MAPS_DEATH));
+            section.getKeys(false).forEach(key -> loadRegion(dRegions + "." + key, "Death Region", "The player will die if they hit this region", SettingGroup.PARKOUR_MAP_DEATH));
         }
     }
 
@@ -188,7 +188,7 @@ public class ParkourMapSettings extends BaseSettings {
      */
     private Checkpoint initializeCheckpoint(String base, String key) {
         String baseKey = base + "." + key + ".";
-        SettingGroup g = SettingGroup.PARKOUR_MAPS_CHECKPOINTS;
+        SettingGroup g = SettingGroup.PARKOUR_MAP_CHECKPOINTS;
 
         //Create the checkpoint
         Checkpoint cp = new Checkpoint();

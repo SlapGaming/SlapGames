@@ -23,7 +23,7 @@ public abstract class BaseArenaSettings extends BaseSettings {
     @Override
     public void initializeSettings() {
         super.initializeSettings();
-        SettingGroup g = SettingGroup.BASE; //TODO replace with BASE_ARENA
+        SettingGroup g = SettingGroup.ARENA;
         //Load the value
         name = load("name", String.class, "Name", "The name of the arena", g);
         buildBy = load("buildby", String.class, "Build by", "The people who build this arena", g);

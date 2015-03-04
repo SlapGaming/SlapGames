@@ -29,7 +29,7 @@ public class BaseGameSettings extends BaseSettings {
         super.initializeSettings();
 
         //Get the prefix
-        prefix = load("prefix", String.class, "Prefix", "The prefix shown before broadcasts of this game", SettingGroup.BASE);
+        prefix = load("prefix", String.class, "Prefix", "The prefix shown before broadcasts of this game", SettingGroup.GENERAL);
         coloredPrefix = (prefix.getValue() == null ? "" :  ChatColor.translateAlternateColorCodes('&', prefix.getValue()));
     }
 
@@ -38,4 +38,5 @@ public class BaseGameSettings extends BaseSettings {
         super.checkExceptions();
         checkSet(prefix);
     }
+
 }

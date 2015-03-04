@@ -41,8 +41,13 @@ public class TNTRunArenaSettings extends BaseArenaSettings {
     @Override
     public void initializeSettings() {
         super.initializeSettings();
-        SettingGroup g = SettingGroup.BASE_ARENA;
+        SettingGroup g = SettingGroup.ARENA;
         deathRegion = loadRegion("deathregion", "Death Region", "If a player enters this region they will be gameover", g);
+
+        //Double jump
+        doubleJump = load("doublejump", false, "Double Jump", "Allow players to double jump", g, true);
+        maxDoubleJumps = load("maxdoublejumps", Integer.class, "Max Double Jumps", "The number of double jumps the player can do", g);
+        doubleJumpPower = load ("doublejumppower", Integer.class, "Double Jump Power", "The power multiplier of the double jump (0-10)", g);
 
         //Get the floors
         floors = new ArrayList<>();
@@ -51,15 +56,10 @@ public class TNTRunArenaSettings extends BaseArenaSettings {
             Set<String> keys = floorsSection.getKeys(false);
             if (keys != null) {
                 keys.forEach(k ->  {
-                    floors.add(loadRegion("floors." + k, "Floor", "A floor that will dissapear when ran over", g));
+                    floors.add(loadRegion("floors." + k, "Floor", "A floor that will dissapear when ran over", SettingGroup.TNTRUN_FLOORS));
                 });
             }
         }
-
-        //Double jump
-        doubleJump = load("doublejump", false, "Double Jump", "Allow players to double jump", g, true);
-        maxDoubleJumps = load("maxdoublejumps", Integer.class, "Max Double Jumps", "The number of double jumps the player can do", g);
-        doubleJumpPower = load ("doublejumppower", Integer.class, "Double Jump Power", "The power multiplier of the double jump (0-10)", g);
     }
 
     @Override
