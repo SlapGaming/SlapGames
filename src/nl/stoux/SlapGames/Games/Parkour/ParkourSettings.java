@@ -83,18 +83,16 @@ public class ParkourSettings extends BaseGameSettings {
         return pad;
     }
 
+    @Getter
     public class Pad {
 
         /** The key in the config */
-        @Getter(AccessLevel.PRIVATE)
         private String key;
 
         /** The location of the pad */
-        @Getter(AccessLevel.PUBLIC)
         private Setting<Vector> padLocation;
 
         /** The location of the sign */
-        @Getter(AccessLevel.PUBLIC)
         private Setting<Vector> signLocation;
 
         public Pad(String key) {
